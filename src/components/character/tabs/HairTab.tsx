@@ -24,35 +24,37 @@ const hairColors = [
 export const HairTab = ({ hairStyle, hairColor, onHairStyleChange, onHairColorChange }: HairTabProps) => {
   return (
     <div className="space-y-6 animate-fade-in">
-      <GlassPanel className="p-6">
-        <h3 className="text-lg font-semibold mb-4 text-accent">Hair Style</h3>
+      <GlassPanel>
+        <h3 className="text-xs font-semibold mb-5 text-white/80 uppercase tracking-[1px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          Hair Style
+        </h3>
         <div className="flex items-center justify-between gap-4">
           <Button
-            variant="outline"
+            variant="ghost"
             size="icon"
             onClick={() => onHairStyleChange(Math.max(0, hairStyle - 1))}
-            className="border-glass-border/50 hover:bg-muted/50 hover:border-accent"
+            className="hover:bg-white/10 text-white hover:text-cyan-400 transition-all"
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="w-5 h-5" />
           </Button>
           
           <div className="flex-1 text-center">
-            <div className="text-3xl font-bold text-accent mb-1">{hairStyle}</div>
-            <div className="text-xs text-muted-foreground">Style ID</div>
+            <div className="text-3xl font-bold text-cyan-400 mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{hairStyle}</div>
+            <div className="text-xs text-white/60 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Style ID</div>
           </div>
           
           <Button
-            variant="outline"
+            variant="ghost"
             size="icon"
             onClick={() => onHairStyleChange(Math.min(99, hairStyle + 1))}
-            className="border-glass-border/50 hover:bg-muted/50 hover:border-accent"
+            className="hover:bg-white/10 text-white hover:text-cyan-400 transition-all"
           >
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-5 h-5" />
           </Button>
         </div>
       </GlassPanel>
 
-      <GlassPanel className="p-6">
+      <GlassPanel>
         <ColorPicker
           label="Hair Color"
           colors={hairColors}

@@ -111,7 +111,7 @@ const Index = () => {
 
       {/* Floating Right Panel - Game HUD style */}
       <div className="fixed top-0 right-0 h-screen flex items-center pr-10 z-20">
-        <div className="w-[420px] h-[calc(100vh-80px)] flex flex-col gap-6 p-6 rounded-3xl backdrop-blur-[20px] bg-[rgba(15,23,42,0.7)] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]" style={{ WebkitBackdropFilter: 'blur(20px)' }}>
+        <div className="w-[420px] h-[calc(100vh-80px)] flex flex-col gap-6 p-8 rounded-3xl backdrop-blur-[20px] bg-[rgba(15,23,42,0.7)] border border-white/[0.15] shadow-[0_8px_32px_rgba(0,0,0,0.5)]" style={{ WebkitBackdropFilter: 'blur(20px)' }}>
           {/* Header */}
           <div className="text-center space-y-2 animate-fade-in">
             <h1 className="text-3xl font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">

@@ -15,8 +15,10 @@ interface FacialTabProps {
 export const FacialTab = ({ values, onValueChange }: FacialTabProps) => {
   return (
     <div className="space-y-6 animate-fade-in">
-      <GlassPanel className="p-6">
-        <h3 className="text-lg font-semibold mb-4 text-accent">Facial Features</h3>
+      <GlassPanel>
+        <h3 className="text-xs font-semibold mb-5 text-white/80 uppercase tracking-[1px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          Facial Features
+        </h3>
         <div className="space-y-4">
           <CustomSlider
             label="Nose Width"
