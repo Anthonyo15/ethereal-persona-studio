@@ -5,6 +5,9 @@ import { GlassPanel } from '@/components/character/GlassPanel';
 import { IdentityTab } from '@/components/character/tabs/IdentityTab';
 import { FacialTab } from '@/components/character/tabs/FacialTab';
 import { HairTab } from '@/components/character/tabs/HairTab';
+import { SkinTab } from '@/components/character/tabs/SkinTab';
+import { MakeupTab } from '@/components/character/tabs/MakeupTab';
+import { PresetsTab } from '@/components/character/tabs/PresetsTab';
 import { Button } from '@/components/ui/button';
 import { RotateCcw, ZoomIn, ZoomOut } from 'lucide-react';
 
@@ -22,8 +25,40 @@ const Index = () => {
     eyeSpacing: [50],
     cheekbones: [50],
   });
-  const [hairStyle, setHairStyle] = useState(0);
-  const [hairColor, setHairColor] = useState('#1A1A1A');
+  const [hairValues, setHairValues] = useState({
+    hairStyle: 0,
+    hairPrimaryColor: '#1A1A1A',
+    hairSecondaryColor: '#8B0000',
+    useSecondaryColor: false,
+    beardStyle: 0,
+    beardColor: '#1A1A1A',
+    beardOpacity: [100],
+    eyebrowStyle: 0,
+    eyebrowColor: '#1A1A1A',
+    eyebrowOpacity: [100],
+  });
+  const [skinValues, setSkinValues] = useState({
+    agingType: 0,
+    agingIntensity: [0],
+    sunDamageType: 0,
+    sunDamageIntensity: [0],
+    molesType: 0,
+    molesIntensity: [0],
+    blemishesType: 0,
+    blemishesIntensity: [0],
+  });
+  const [makeupValues, setMakeupValues] = useState({
+    eyeMakeupType: 0,
+    eyeMakeupColor: '#8B4513',
+    eyeMakeupOpacity: [0],
+    blushType: 0,
+    blushColor: '#FF69B4',
+    blushOpacity: [0],
+    lipstickType: 0,
+    lipstickColor: '#DC143C',
+    lipstickOpacity: [0],
+  });
+  const [selectedPreset, setSelectedPreset] = useState<number | null>(null);
 
   const handleIdentityChange = (key: string, value: number[]) => {
     setIdentityValues((prev) => ({ ...prev, [key]: value }));
@@ -33,6 +68,18 @@ const Index = () => {
     setFacialValues((prev) => ({ ...prev, [key]: value }));
   };
 
+  const handleHairChange = (key: string, value: number | number[] | string | boolean) => {
+    setHairValues((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleSkinChange = (key: string, value: number | number[]) => {
+    setSkinValues((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleMakeupChange = (key: string, value: number | number[] | string) => {
+    setMakeupValues((prev) => ({ ...prev, [key]: value }));
+  };
+
   const renderTabContent = () => {
     switch (activeTab) {
       case 'identity':
@@ -40,38 +87,13 @@ const Index = () => {
       case 'facial':
         return <FacialTab values={facialValues} onValueChange={handleFacialChange} />;
       case 'hair':
-        return (
-          <HairTab
-            hairStyle={hairStyle}
-            hairColor={hairColor}
-            onHairStyleChange={setHairStyle}
-            onHairColorChange={setHairColor}
-          />
-        );
+        return <HairTab values={hairValues} onValueChange={handleHairChange} />;
       case 'skin':
-        return (
-          <div className="animate-fade-in">
-            <GlassPanel className="p-6">
-              <p className="text-muted-foreground text-center">Skin & Age controls coming soon...</p>
-            </GlassPanel>
-          </div>
-        );
+        return <SkinTab values={skinValues} onValueChange={handleSkinChange} />;
       case 'makeup':
-        return (
-          <div className="animate-fade-in">
-            <GlassPanel className="p-6">
-              <p className="text-muted-foreground text-center">Makeup controls coming soon...</p>
-            </GlassPanel>
-          </div>
-        );
+        return <MakeupTab values={makeupValues} onValueChange={handleMakeupChange} />;
       case 'presets':
-        return (
-          <div className="animate-fade-in">
-            <GlassPanel className="p-6">
-              <p className="text-muted-foreground text-center">Presets & Save options coming soon...</p>
-            </GlassPanel>
-          </div>
-        );
+        return <PresetsTab selectedPreset={selectedPreset} onPresetSelect={setSelectedPreset} />;
       default:
         return null;
     }

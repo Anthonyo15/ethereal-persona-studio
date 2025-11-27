@@ -1,13 +1,23 @@
 import { ColorPicker } from '../ColorPicker';
+import { TypeSelector } from '../TypeSelector';
+import { CustomSlider } from '../CustomSlider';
 import { GlassPanel } from '../GlassPanel';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 
 interface HairTabProps {
-  hairStyle: number;
-  hairColor: string;
-  onHairStyleChange: (style: number) => void;
-  onHairColorChange: (color: string) => void;
+  values: {
+    hairStyle: number;
+    hairPrimaryColor: string;
+    hairSecondaryColor: string;
+    useSecondaryColor: boolean;
+    beardStyle: number;
+    beardColor: string;
+    beardOpacity: number[];
+    eyebrowStyle: number;
+    eyebrowColor: string;
+    eyebrowOpacity: number[];
+  };
+  onValueChange: (key: string, value: number | number[] | string | boolean) => void;
 }
 
 const hairColors = [
@@ -21,46 +31,102 @@ const hairColors = [
   '#C0C0C0', // Silver
 ];
 
-export const HairTab = ({ hairStyle, hairColor, onHairStyleChange, onHairColorChange }: HairTabProps) => {
+export const HairTab = ({ values, onValueChange }: HairTabProps) => {
   return (
     <div className="space-y-6 animate-fade-in">
+      {/* Hair */}
       <GlassPanel>
         <h3 className="text-xs font-semibold mb-5 text-white/80 uppercase tracking-[1px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-          Hair Style
+          Hair
         </h3>
-        <div className="flex items-center justify-between gap-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => onHairStyleChange(Math.max(0, hairStyle - 1))}
-            className="hover:bg-white/10 text-white hover:text-cyan-400 transition-all"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </Button>
-          
-          <div className="flex-1 text-center">
-            <div className="text-3xl font-bold text-cyan-400 mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{hairStyle}</div>
-            <div className="text-xs text-white/60 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Style ID</div>
+        <div className="space-y-4">
+          <TypeSelector
+            label="Style"
+            value={values.hairStyle}
+            onChange={(val) => onValueChange('hairStyle', val)}
+            max={50}
+          />
+          <ColorPicker
+            label="Primary Color"
+            colors={hairColors}
+            selectedColor={values.hairPrimaryColor}
+            onColorSelect={(val) => onValueChange('hairPrimaryColor', val)}
+          />
+          <div className="flex items-center gap-2">
+            <Checkbox
+              checked={values.useSecondaryColor}
+              onCheckedChange={(checked) => onValueChange('useSecondaryColor', checked)}
+              id="use-secondary"
+              className="border-white/20 data-[state=checked]:bg-cyan-500 data-[state=checked]:border-cyan-500"
+            />
+            <label
+              htmlFor="use-secondary"
+              className="text-sm font-medium text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] cursor-pointer"
+            >
+              Use Secondary Color
+            </label>
           </div>
-          
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => onHairStyleChange(Math.min(99, hairStyle + 1))}
-            className="hover:bg-white/10 text-white hover:text-cyan-400 transition-all"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </Button>
+          {values.useSecondaryColor && (
+            <ColorPicker
+              label="Secondary Color"
+              colors={hairColors}
+              selectedColor={values.hairSecondaryColor}
+              onColorSelect={(val) => onValueChange('hairSecondaryColor', val)}
+            />
+          )}
         </div>
       </GlassPanel>
 
+      {/* Beard */}
       <GlassPanel>
-        <ColorPicker
-          label="Hair Color"
-          colors={hairColors}
-          selectedColor={hairColor}
-          onColorSelect={onHairColorChange}
-        />
+        <h3 className="text-xs font-semibold mb-5 text-white/80 uppercase tracking-[1px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          Beard
+        </h3>
+        <div className="space-y-4">
+          <TypeSelector
+            label="Style"
+            value={values.beardStyle}
+            onChange={(val) => onValueChange('beardStyle', val)}
+            max={28}
+          />
+          <ColorPicker
+            label="Color"
+            colors={hairColors}
+            selectedColor={values.beardColor}
+            onColorSelect={(val) => onValueChange('beardColor', val)}
+          />
+          <CustomSlider
+            label="Opacity"
+            value={values.beardOpacity}
+            onValueChange={(val) => onValueChange('beardOpacity', val)}
+          />
+        </div>
+      </GlassPanel>
+
+      {/* Eyebrows */}
+      <GlassPanel>
+        <h3 className="text-xs font-semibold mb-5 text-white/80 uppercase tracking-[1px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          Eyebrows
+        </h3>
+        <div className="space-y-4">
+          <TypeSelector
+            label="Style"
+            value={values.eyebrowStyle}
+            onChange={(val) => onValueChange('eyebrowStyle', val)}
+            max={33}
+          />
+          <ColorPicker
+            label="Color"
+            colors={hairColors}
+            selectedColor={values.eyebrowColor}
+            onColorSelect={(val) => onValueChange('eyebrowColor', val)}
+          />
+          <CustomSlider
+            label="Opacity"
+            value={values.eyebrowOpacity}
+            onValueChange={(val) => onValueChange('eyebrowOpacity', val)}
+          />
+        </div>
       </GlassPanel>
     </div>
   );
