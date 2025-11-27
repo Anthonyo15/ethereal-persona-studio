@@ -10,10 +10,11 @@ export const GlassPanel = ({ children, className }: GlassPanelProps) => {
   return (
     <div
       className={cn(
-        "backdrop-blur-xl bg-glass/60 border border-glass-border/30 rounded-xl shadow-soft",
-        "transition-all duration-300 hover:bg-glass/70",
+        "rounded-2xl border border-white/10 shadow-[0_4px_16px_rgba(0,0,0,0.3)]",
+        "transition-all duration-300 backdrop-blur-[16px] bg-[rgba(15,23,42,0.5)]",
         className
       )}
+      style={{ WebkitBackdropFilter: 'blur(16px)' }}
     >
       {children}
     </div>

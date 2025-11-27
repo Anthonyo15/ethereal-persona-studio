@@ -23,8 +23,8 @@ export const CustomSlider = ({
   return (
     <div className={cn("space-y-2", className)}>
       <div className="flex justify-between items-center">
-        <label className="text-sm font-medium text-foreground">{label}</label>
-        <span className="text-sm font-semibold text-accent">{value[0]}</span>
+        <label className="text-sm font-medium text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{label}</label>
+        <span className="text-sm font-semibold text-cyan-400 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{value[0]}</span>
       </div>
       <Slider
         value={value}
@@ -32,7 +32,7 @@ export const CustomSlider = ({
         min={min}
         max={max}
         step={step}
-        className="[&_.relative]:h-1.5 [&_.relative]:bg-secondary/50 [&_[role=slider]]:h-4 [&_[role=slider]]:w-4 [&_[role=slider]]:bg-accent [&_[role=slider]]:shadow-glow [&_[role=slider]]:border-0 [&_.bg-primary]:bg-accent"
+        className="[&_.relative]:h-1 [&_.relative]:bg-white/10 [&_[role=slider]]:h-3.5 [&_[role=slider]]:w-3.5 [&_[role=slider]]:bg-cyan-400 [&_[role=slider]]:shadow-[0_0_8px_rgba(6,182,212,0.8)] [&_[role=slider]]:border-0 [&_.bg-primary]:bg-gradient-to-r [&_.bg-primary]:from-cyan-500 [&_.bg-primary]:to-blue-500 [&_.bg-primary]:shadow-[0_0_8px_rgba(6,182,212,0.6)]"
       />
     </div>
   );
