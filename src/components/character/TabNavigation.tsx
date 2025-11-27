@@ -25,7 +25,7 @@ interface TabNavigationProps {
 
 export const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) => {
   return (
-    <div className="flex justify-center gap-2 p-2 rounded-2xl backdrop-blur-[16px] bg-[rgba(15,23,42,0.5)] border border-white/10" style={{ WebkitBackdropFilter: 'blur(16px)' }}>
+    <div className="flex items-center justify-center gap-2 p-2 rounded-2xl backdrop-blur-[16px] bg-[rgba(15,23,42,0.5)] border border-white/10" style={{ WebkitBackdropFilter: 'blur(16px)' }}>
       {tabs.map((tab) => {
         const Icon = tab.icon;
         const isActive = activeTab === tab.id;
@@ -35,7 +35,7 @@ export const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) =>
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
             className={cn(
-              "flex flex-col items-center gap-1.5 px-4 py-3 rounded-lg transition-all duration-300",
+              "flex flex-col items-center justify-center gap-1.5 px-4 py-3 rounded-lg transition-all duration-300 min-h-[76px]",
               "hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-cyan-400",
               isActive
                 ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-[0_0_16px_rgba(6,182,212,0.6)]"
